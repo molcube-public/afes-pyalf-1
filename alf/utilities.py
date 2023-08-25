@@ -83,11 +83,20 @@ def initialize_alf_info(engine='charmm'):
   else: # blade script
     fex='inp'
 
-  if not os.path.exists('msld_flat.'+fex):
-    shutil.copy(os.path.dirname(__file__)+'/default_scripts/%s_flat.%s' % (engine,fex),'msld_flat.'+fex)
-    print("Note: copied default script for msld_flat.%s\nIf you modify or replace this file, it will not be overwritten" % (fex,))
-  if not os.path.exists('msld_prod.'+fex):
-    shutil.copy(os.path.dirname(__file__)+'/default_scripts/%s_prod.%s' % (engine,fex),'msld_prod.'+fex)
-    print("Note: copied default script for msld_prod.%s\nIf you modify or replace this file, it will not be overwritten" % (fex,))
-
+  if engine!='blade':
+     if not os.path.exists('msld_flat.'+fex):
+       shutil.copy(os.path.dirname(__file__)+'/default_scripts/%s_flat.%s' % (engine,fex),'msld_flat.'+fex)
+       print("Note: copied default script for msld_flat.%s\nIf you modify or replace this file, it will not be overwritten" % (fex,))
+     if not os.path.exists('msld_prod.'+fex):
+       shutil.copy(os.path.dirname(__file__)+'/default_scripts/%s_prod.%s' % (engine,fex),'msld_prod.'+fex)
+       print("Note: copied default script for msld_prod.%s\nIf you modify or replace this file, it will not be overwritten" % (fex,))
+  if engine=='blade':
+     if not os.path.exists('msld_flat.'+fex):
+        shutil.copy(os.path.dirname(__file__)+'/default_scripts/msld_flat_custom.inp','msld_flat.'+fex)
+     if not os.path.exists('msld_prod.'+fex):
+        shutil.copy(os.path.dirname(__file__)+'/default_scripts/msld_prod_custom.inp','msld_prod.'+fex)
+     if not os.path.exists('my_system_common.inp'):
+        shutil.copy(os.path.dirname(__file__)+'/default_scripts/my_system_common.inp','my_system_common.inp')
+        
+  
   return alf_info

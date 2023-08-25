@@ -84,6 +84,11 @@ def runprod(step,a,itt0,itt,nsteps=500000,engine='charmm'):
   import numpy as np
   import alf
 
+
+  env = dict(os.environ)
+  env['OMP_NUM_THREADS']='1'
+
+
   alf_info=alf.initialize_alf_info(engine)
 
   home_dir=os.getcwd()
@@ -141,7 +146,8 @@ def runprod(step,a,itt0,itt,nsteps=500000,engine='charmm'):
           fpin=open('arguments.inp','w')
           fpin.write("variables set nsteps %d\nvariables set itt %d" % (nsteps,i))
           fpin.close()
-          subprocess.call(['mpirun','-np',str(alf_info['nreps']),'-x','OMP_NUM_THREADS=1','--bind-to','none','--bynode',alf_info['enginepath'],'../msld_prod.inp'],stdout=fpout,stderr=fperr)
+          #subprocess.call(['mpirun','-np',str(alf_info['nreps']),'-x','OMP_NUM_THREADS=1','--bind-to','none','--bynode',alf_info['enginepath'],'../msld_prod.inp'],stdout=fpout,stderr=fperr)
+          subprocess.call([alf_info['enginepath'],'../msld_prod.inp'],stdout=fpout,stderr=fperr,env=env)
         elif engine in ['pycharmm']:
           fpin=open('arguments.py','w')
           fpin.write("nsteps=%d\nitt=%d" % (nsteps,i))
