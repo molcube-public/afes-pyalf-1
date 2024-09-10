@@ -47,6 +47,7 @@ run setvariable gamma 0.1
 
 variables calculate ittm1 int - {itt} 1
 
+run setvariable domdecheuristic off
 run setvariable fnmxtc dcd/{sysname}_prod{itt}.xtc
 run setvariable fnmnrg dcd/{sysname}_prod{itt}.nrg
 run setvariable fnmlmd res/{sysname}_prod{itt}.lmd
