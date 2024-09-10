@@ -48,7 +48,7 @@ coordinates velocity {temp}
 structure shake hbond
 run setvariable gamma 0.1
 
-
+run setvariable domdecheuristic off
 run setvariable fnmxtc dcd/{sysname}_heat.xtc
 run setvariable fnmnrg dcd/{sysname}_heat.nrg
 run setvariable fnmlmd res/{sysname}_heat.lmd
@@ -70,6 +70,7 @@ run dynamics
 
 
 !! Production run of 100 ps / 1 ns
+run setvariable domdecheuristic off
 run setvariable fnmxtc dcd/{sysname}_flat.xtc
 run setvariable fnmnrg dcd/{sysname}_flat.nrg
 run setvariable fnmlmd res/{sysname}_flat.lmd
